@@ -33,4 +33,11 @@ El script se divide en tres bloques lógicos principales:
 
 ### 1. Primera CTE (`ventas_mensuales`)
 Filtra los pedidos completados, uniendo las tablas `pedidos`, `detalle_pedidos`, `productos` y `categorias`. Agrupa y normaliza las fechas al inicio de cada mes para unificar la granularidad.
-```sql
+
+### 2. Segunda CTE (`metricas_ventana`)
+Toma los datos agrupados de la CTE anterior y aplica funciones analíticas mediante ventanas:
+* Ranking: Posición comercial de la categoría en el mes actual.
+* Running Total: Crecimiento acumulado en el tiempo por categoría.
+* Promedio Histórico: Base de referencia para la evaluación de desempeño.
+### 3. Consulta principal (`select final`)
+Da formato legible a los datos (año-mes, redondeo de decimales) e implementa la regla de negocio mediante un CASE WHEN para clasificar el desempeño mensual.
